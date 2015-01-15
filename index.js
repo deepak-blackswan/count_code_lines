@@ -1,14 +1,35 @@
-var fs    = require('fs');
-var sloc  = require('sloc');
+var fs    	= require('fs');							// get filesystem module
+var sloc  	= require('sloc');
+var http 	= require("http");							// get the HTTP server module
+var express = require("express");						// get express for added functionality
+var app		= express();								// initialise express
 
-fs.readFile("sample.js", "utf8", function(err, code){
+// get our configuration variable
+var config 		= JSON.parse(fs.readFileSync("./config.json"));
+var host 		= config.host;
+var port		= config.port; 
 
-  if(err){ console.error(err); }
-  else{
-    var stats = sloc(code,"javascript");
-    for(i in sloc.keys){
-      var k = sloc.keys[i];
-      console.log(k + " : " + stats[k]);
-    }
-  }
-});
+function read(){
+	fs.readFile("sample.java", "utf8", function(err, code){
+
+	  if(err){ console.error(err); }
+	  else{
+	    var stats = sloc(code,"java");
+	    for(i in sloc.keys){
+	      var k = sloc.keys[i];
+	      console.log(k + " : " + stats[k]);
+	    }
+	  }
+	});	
+}
+
+app.get('/', function(req, res){
+	
+	console.log("Starting");
+	read();
+	res.set('Content-Type', 'text/plain');
+	res.status(200).send();
+	res.end();
+
+}); 
+http.createServer(app).listen(port);
