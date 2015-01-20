@@ -5,6 +5,7 @@ function Read(){}
 
 Read.prototype.readfile = function() {
 
+	var result = ''
 	// Read lines now
 	fs.readFile("sample.java", "utf8", function(err, code){
 
@@ -18,7 +19,7 @@ Read.prototype.readfile = function() {
 			for(i in sloc.keys){
 				
 				var k 	= sloc.keys[i];
-				result += k + " : " + stats[k] + "\n";
+				result += k + " = " + stats[k] + "\n";
 				
 		    }
 		    console.log(result);

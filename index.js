@@ -21,10 +21,15 @@ app.get('/', function(req, res){
 	read.readfile();
 	
 	res.set('Content-Type', 'text/plain');
-	res.status(200).send( );
+	res.status(200).send("Done");
 	res.end();		
 	
 }); 
 
-http.createServer(app).listen(port);
+// Start the server
+app.set( 'port', process.env.PORT || 3000 );
+
+var server = app.listen(app.get( 'port' ), function() {
+	console.log( 'Server listening on port ' + server.address().port );
+});
 
