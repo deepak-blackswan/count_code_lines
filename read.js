@@ -1,7 +1,9 @@
 var sloc  = require('sloc');
 var fs    = require('fs');							// get filesystem module
 
-function Read(){}
+var Read = function (){
+
+};
 
 Read.prototype.readfile = function() {
 

@@ -9,9 +9,6 @@ var config 		= JSON.parse(fs.readFileSync("./config.json"));
 var host 		= config.host;
 var port		= config.port; 
 
-
-
-
 app.get('/', function(req, res){
 
 	// create a new instance of the read "class"
